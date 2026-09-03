@@ -1,49 +1,42 @@
-require("dotenv").config();
+import express from "express";
+import "dotenv/config";
+import cors from "cors";
+import { GoogleGenAI } from "@google/genai";
 
-const { GoogleGenAI } = require("@google/genai");
+const app = express();
+const port = 8080;
+
+app.use(express.json());
+app.use(cors());
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY
 });
 
-async function testGemini() {
+app.post("/test", async (req, res) => {
     try {
+        const { message } = req.body;
+
         const response = await ai.models.generateContent({
-            model: "gemini-3.6-flash",
-            contents: "What is java??"
+            model: "gemini-3.7-flash",
+            contents: message
         });
 
-        console.log(response.text);
+        console.log("Gemini:", response.text);
+
+        res.json({
+            answer: response.text
+        });
+
     } catch (error) {
-        console.error("Gemini Error:", error.message);
+        console.error("Gemini Error:", error);
+
+        res.status(500).json({
+            error: error.message
+        });
     }
-}
+});
 
-testGemini();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import express from "express";
-// import "dotenv/config";
-// import cors from "cors";
-
-// const app = express();
-// const port = 8080;
-
-// app.use(express.json());
-// app.use(cors());
-
-// app.listen(port , ()=>{
-//     console.log(`Server runing on port : ${port}`);
-// });
+app.listen(port, () => {
+    console.log(`Server running on port: ${port}`);
+});
