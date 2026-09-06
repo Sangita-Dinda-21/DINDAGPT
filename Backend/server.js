@@ -3,12 +3,16 @@ import "dotenv/config";
 import cors from "cors";
 import { GoogleGenAI } from "@google/genai";
 import mongoose from "mongoose";
+import Thread from "./models/Thread.js";
+import chatRoutes from "./routes/chat.js";
 
 const app = express();
 const port = 8080;
 
 app.use(express.json());
 app.use(cors());
+
+app.use("/api", chatRoutes);
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY
