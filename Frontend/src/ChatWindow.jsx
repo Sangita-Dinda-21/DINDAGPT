@@ -1,11 +1,15 @@
 import React from "react";
 import "./ChatWindow.css";
 import Chat from "./Chat.jsx";
+import { useContext,useState } from "react";
 import { MyContext } from "./MyContext";
+import {CircleLoader} from "react-spinners";
 
 function ChatWindow() {
   const { prompt, setPrompt, reply, setReply, currThreadID, setCurrThreadID } = React.useContext(MyContext);
+  const [loading, setLoading] = useState(false);
   const getReply = async () => {
+    setLoading(true);
     const options = {
     method: "POST",
     headers: {
@@ -26,6 +30,7 @@ function ChatWindow() {
     }catch(error){
       console.error("Error fetching reply:", error);
     }
+    setLoading(false);
   }
 
   return (
@@ -41,7 +46,9 @@ function ChatWindow() {
 
 
         <Chat />
-
+        <CircleLoader color="#36D7B7" loading={loading} >
+          
+        </CircleLoader>
 
         <div className="chatInput">
 
