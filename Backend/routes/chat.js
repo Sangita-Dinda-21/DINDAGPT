@@ -73,7 +73,7 @@ route.delete("/thread/:threadId", async (req, res) => {
 
 
 route.post("/chat", async (req, res) => {
-    const { message, threadId } = req.body;
+    const { threadId,message } = req.body;
 
     if(!threadId || !message) {
         return res.status(400).json({ error: "Thread ID and message are required" });

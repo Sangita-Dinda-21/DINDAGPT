@@ -8,7 +8,7 @@ const ai = new GoogleGenAI({
 const geminiAPIResponse = async (message) => {
     try {
         const response = await ai.models.generateContent({
-            model: "gemini-3.7-flash",
+            model: "gemini-3.6-flash",
             contents: `Answer the question directly. Do not use **, *, #, or any Markdown formatting. Give only the final answer in plain text.
 
 Question: ${message}`
