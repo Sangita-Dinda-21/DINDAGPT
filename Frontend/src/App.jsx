@@ -10,12 +10,16 @@ function App() {
   const [prompt, setPrompt] = useState("");
   const [reply, setReply] = useState(null);
   const [currThreadID, setCurrThreadID] = useState(uuidv1());
+  const [prevChats, setPrevChats] = useState([]);
+  const [newChat, setNewChat] = useState(true);
 
   const providerValue = {
     // Define your context value here
     prompt,setPrompt,
     reply,setReply,
-    currThreadID,setCurrThreadID
+    currThreadID,setCurrThreadID,
+    newChat,setNewChat,
+    prevChats,setPrevChats,
   };
 
   return (

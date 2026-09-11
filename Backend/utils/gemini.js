@@ -9,9 +9,22 @@ const geminiAPIResponse = async (message) => {
     try {
         const response = await ai.models.generateContent({
             model: "gemini-3.6-flash",
-            contents: `Answer the question directly. Do not use **, *, #, or any Markdown formatting. Give only the final answer in plain text.
+            contents: `Answer the question directly.
 
-Question: ${message}`
+                If the answer contains programming code, always put the code inside a Markdown code block with the correct language.
+
+                Example:
+                \`\`\`java
+                public class Example {
+                    public static void main(String[] args) {
+                        System.out.println("Hello");
+                    }
+                }
+                \`\`\`
+
+                For normal answers, use simple readable text.
+
+                Question: ${message}`
         });
 
         console.log("Gemini:", response.text);

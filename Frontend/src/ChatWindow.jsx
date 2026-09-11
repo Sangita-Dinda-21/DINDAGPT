@@ -1,37 +1,66 @@
 import React from "react";
 import "./ChatWindow.css";
 import Chat from "./Chat.jsx";
-import { useContext,useState } from "react";
+import { useContext,useState,useEffect } from "react";
 import { MyContext } from "./MyContext";
 import {CircleLoader} from "react-spinners";
 
 function ChatWindow() {
-  const { prompt, setPrompt, reply, setReply, currThreadID, setCurrThreadID } = React.useContext(MyContext);
+  const { prompt, setPrompt, reply, setReply, currThreadID, setCurrThreadID, prevChats, setPrevChats } = React.useContext(MyContext);
   const [loading, setLoading] = useState(false);
   const getReply = async () => {
-    setLoading(true);
-    const options = {
+
+  if (loading || !prompt.trim()) return;
+
+  setLoading(true);
+
+  const options = {
     method: "POST",
     headers: {
-        "Content-Type": "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-        message: prompt,
-        threadId: currThreadID,
+      message: prompt,
+      threadId: currThreadID,
     }),
+  };
+
+  try {
+    const response = await fetch(
+      "http://localhost:8080/api/chat",
+      options
+    );
+
+    const res = await response.json();
+
+    console.log(res);
+
+    setReply(res.answer);
+
+  } catch (error) {
+    console.error("Error fetching reply:", error);
+  }
+
+  setLoading(false);
 };
 
-    try{
-      const response =await fetch("http://localhost:8080/api/chat", options);
-      const res = await response.json();
-      console.log(res);
-      setReply(res.answer);
 
-    }catch(error){
-      console.error("Error fetching reply:", error);
+  //append chat 
+  useEffect(() => {
+    if(prompt && reply){
+      setPrevChats((prevChats) =>(
+        [...prevChats,{
+          role: "user",
+          content: prompt
+        },{
+          role: "assistant",
+          content: reply
+        }]
+      ));
     }
-    setLoading(false);
-  }
+    setPrompt("");
+  },[reply])
+
 
   return (
     <div className="chatWindow">
