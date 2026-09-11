@@ -12,6 +12,7 @@ function App() {
   const [currThreadID, setCurrThreadID] = useState(uuidv1());
   const [prevChats, setPrevChats] = useState([]);
   const [newChat, setNewChat] = useState(true);
+  const [allThreads,setAllThreads] = useState([]);
 
   const providerValue = {
     // Define your context value here
@@ -20,6 +21,7 @@ function App() {
     currThreadID,setCurrThreadID,
     newChat,setNewChat,
     prevChats,setPrevChats,
+    allThreads,setAllThreads
   };
 
   return (

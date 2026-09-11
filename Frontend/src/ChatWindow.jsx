@@ -6,13 +6,14 @@ import { MyContext } from "./MyContext";
 import {CircleLoader} from "react-spinners";
 
 function ChatWindow() {
-  const { prompt, setPrompt, reply, setReply, currThreadID, setCurrThreadID, prevChats, setPrevChats } = React.useContext(MyContext);
+  const { prompt, setPrompt, reply,setNewChat, setReply, currThreadID, setCurrThreadID, prevChats, setPrevChats } = React.useContext(MyContext);
   const [loading, setLoading] = useState(false);
   const getReply = async () => {
 
   if (loading || !prompt.trim()) return;
 
   setLoading(true);
+  setNewChat(false);
 
   const options = {
     method: "POST",

@@ -41,7 +41,9 @@ button:hover{
 .history{
     padding: 10px 20px;
     margin: 10px;
-    height: 100%;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
 }
 
 .history li{
