@@ -1,6 +1,6 @@
 .chats {
     max-width: 700px;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding: 8rem;
 }
 
@@ -43,12 +43,39 @@ pre {
 }
 
 .gptMessage pre {
+    background-color: #000 !important;
+    color: #fff !important;
     padding: 15px;
-    overflow-x: auto;
     border-radius: 8px;
-    margin: 12px 0;
+    overflow-x: auto;
 }
 
-.gptMessage code {
-    font-family: monospace;
+.gptMessage pre code {
+    background-color: transparent !important;
+    color: #fff !important;
+}
+
+.gptMessage pre {
+    background-color: #000 !important;
+    color: #fff !important;
+    padding: 15px;
+    border-radius: 8px;
+    white-space: pre;
+    overflow-x: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: #555 #000;
+}
+
+.gptMessage pre::-webkit-scrollbar {
+    height: 8px;
+}
+
+.gptMessage pre::-webkit-scrollbar-track {
+    background: #000;
+}
+
+.gptMessage pre::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 10px;
 }
