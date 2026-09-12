@@ -5,14 +5,17 @@ import { GoogleGenAI } from "@google/genai";
 import mongoose from "mongoose";
 import Thread from "./models/Thread.js";
 import chatRoutes from "./routes/chat.js";
+import authRoutes from "./routes/auth.js";
 
 const app = express();
+console.log("JWT SECRET:", process.env.JWT_SECRET);
 const port = 8080;
 
 app.use(express.json());
 app.use(cors());
 
 app.use("/api", chatRoutes);
+app.use("/api", authRoutes);
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY
