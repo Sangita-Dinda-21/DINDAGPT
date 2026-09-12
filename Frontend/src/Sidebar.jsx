@@ -52,6 +52,24 @@ function Sidebar() {
     }
   }
 
+  const deleteThread= async (threadId)=>{
+    try{
+      const response =await fetch(`http://localhost:8080/api/thread/${threadId}`,{method:"DELETE"});
+      const res = await response.json();
+      console.log(res);
+
+      setAllThreads(pre => pre.filter(thread => thread.threadID !== threadId));
+
+      if(threadId === currThreadID){
+        createNewChat();
+      }
+
+      
+    }catch(e){
+      console.log(e);
+    }
+  }
+
 
 
   return (
@@ -68,8 +86,15 @@ function Sidebar() {
             allThreads?.map((thread, idx)=>(
               <li key={idx} 
               onClick={(e) => changeThread(thread.threadID)}
+              className={thread.threadID === currThreadID ? "highlighted" :" " }
               >
                 {thread.title}
+                <i className="fa-solid fa-trash"
+                   onClick={(e)=>{
+                    e.stopPropagation();
+                    deleteThread(thread.threadID);
+                   }}
+                ></i>
               </li>
             ))
           }

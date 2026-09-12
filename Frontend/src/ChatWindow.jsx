@@ -8,6 +8,9 @@ import {CircleLoader} from "react-spinners";
 function ChatWindow() {
   const { prompt, setPrompt, reply,setNewChat, setReply, currThreadID, setCurrThreadID, prevChats, setPrevChats } = React.useContext(MyContext);
   const [loading, setLoading] = useState(false);
+  const[isOpen,setIsOpen] = useState(false);
+
+
   const getReply = async () => {
 
   if (loading || !prompt.trim()) return;
@@ -60,7 +63,11 @@ function ChatWindow() {
       ));
     }
     setPrompt("");
-  },[reply])
+  },[reply]);
+
+  const handleProfileClick =()=>{
+    setIsOpen(!isOpen);
+  }
 
 
   return (
@@ -69,11 +76,20 @@ function ChatWindow() {
 
         <div className="navbar">
           <span>DindaGPT  <i className="fa-solid fa-angle-down"></i></span>
-          <div className="userIconDiv">
-            <span><i className="fa-solid fa-user"></i></span>
+          <div className="userIconDiv" onClick={handleProfileClick}>
+            <span className="userIcon"><i className="fa-solid fa-user"></i></span>
           </div>
-        </div>
 
+
+        </div>
+        {
+          isOpen &&
+          <div className="dropDown">
+          <div className="dropDownItem"> <i className="fa-solid fa-cloud-arrow-up"></i> Upgrade Plan</div>
+          <div className="dropDownItem"> <i className="fa-solid fa-gear"></i> Settings</div>
+          <div className="dropDownItem"> <i className="fa-solid fa-right-from-bracket"></i> Log out</div>
+          </div>
+        }
 
         <Chat />
         <CircleLoader color="#36D7B7" loading={loading} >
