@@ -4,6 +4,7 @@ import Chat from "./Chat.jsx";
 import { useContext, useState, useEffect } from "react";
 import { MyContext } from "./MyContext";
 import { CircleLoader } from "react-spinners";
+import { API_URL } from "./api";
 
 function ChatWindow() {
 
@@ -27,11 +28,16 @@ function ChatWindow() {
 
     if (loading || !prompt.trim()) return;
 
+    const token = localStorage.getItem("token");
+
+    // User is not logged in
+    if (!token) {
+        alert("Please Login or Sign Up first to use DindaGPT.");
+        return;
+    }
+
     setLoading(true);
     setNewChat(false);
-
-    // Login ke time save hua token
-    const token = localStorage.getItem("token");
 
     const options = {
       method: "POST",
@@ -50,7 +56,7 @@ function ChatWindow() {
     try {
 
       const response = await fetch(
-        "http://localhost:8080/api/chat",
+        `${API_URL}/api/chat`,
         options
       );
 

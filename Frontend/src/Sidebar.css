@@ -89,3 +89,93 @@ button:hover{
     background-color: rgba(180, 180, 180, 0.05);
     border-radius: 10px;
 }
+
+.auth-form h2 {
+    color: white;
+    text-align: center;
+    margin: 0 0 18px;
+}
+
+.auth-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.auth-form input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    background: #303030;
+    border: 1px solid #444;
+    border-radius: 7px;
+    color: white;
+    outline: none;
+}
+
+.auth-form input:focus {
+    border-color: #777;
+}
+
+.auth-form form button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 7px;
+    background: white;
+    color: #171717;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.auth-form {
+    position: fixed;
+    left: 340px;
+    bottom: 80px;
+    width: 300px;
+    background-color: #212121;
+    border: 1px solid #3a3a3a;
+    border-radius: 12px;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    z-index: 200;
+}
+
+/* Login / Signup options */
+
+.signin {
+    position: relative;
+}
+
+.auth-options {
+    position: absolute;
+    bottom: 65px;
+    left: 10px;
+    width: 180px;
+    background-color: #242424;
+    border: 1px solid #3a3a3a;
+    border-radius: 10px;
+    padding: 6px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.auth-options button {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: #d1d1d1;
+    padding: 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.auth-options button:hover {
+    background-color: #333333;
+    color: white;
+}

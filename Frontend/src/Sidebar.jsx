@@ -4,6 +4,7 @@ import { MyContext } from "./MyContext";
 import {v1 as uuidv1} from "uuid";
 import Login from "./Login";
 import Register from "./Register";
+import { API_URL } from "./api";
 
 
 function Sidebar() {
@@ -33,7 +34,7 @@ const {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-          "http://localhost:8080/api/thread",
+          `${API_URL}/api/thread`,
           {
               headers: {
                   Authorization: `Bearer ${token}`
@@ -76,7 +77,7 @@ useEffect(()=>{
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-          `http://localhost:8080/api/thread/${newthreadId}`,
+          `${API_URL}/api/thread/${newthreadId}`,
           {
               headers: {
                   Authorization: `Bearer ${token}`
@@ -98,7 +99,7 @@ useEffect(()=>{
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-          `http://localhost:8080/api/thread/${threadId}`,
+          `${API_URL}/api/thread/${threadId}`,
           {
               method: "DELETE",
               headers: {
