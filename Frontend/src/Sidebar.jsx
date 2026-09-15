@@ -5,6 +5,8 @@ import {v1 as uuidv1} from "uuid";
 import Login from "./Login";
 import Register from "./Register";
 import { API_URL } from "./api";
+import logo from "./assets/logo.webp";
+
 
 
 function Sidebar() {
@@ -128,7 +130,7 @@ useEffect(()=>{
     <section className="sidebar">
         {/*new chat button*/}
         <button className="new-chat-button" onClick={createNewChat}>
-          <img src="src/assets/logo.webp" alt="gpt logo" className="logo" />
+          <img src={logo} alt="gpt logo" className="logo" />
           <span><i className="fa-solid fa-pen-to-square"></i></span>
         </button>
 
